@@ -1,0 +1,96 @@
+SelectMission("m0");
+
+SetMissionResetPlayerInCar("level7_carstart");
+SetDynaLoadData("l7z1.p3d;l7r1.p3d;l7r7.p3d;");
+
+UsePedGroup(0);
+
+AddStage();
+	SetStageMessageIndex(12);
+	AddObjective("getin");
+		SetObjTargetVehicle("current");
+	CloseObjective();
+CloseStage();
+
+AddStage();
+	RESET_TO_HERE();
+	SetStageMessageIndex(04);
+	SetHUDIcon("homer");
+	AddStageVehicle("homer_v","m0_hom_loc","evade","Missions\level07\M2chase.con","homer");
+	SetVehicleAIParams( "homer_v", 50, 51 );
+	AddStageWaypoint( "m0_hom1" );
+	AddStageWaypoint( "m0_hom2" );
+	AddStageWaypoint( "m0_hom3" );
+	AddStageWaypoint( "m0_hom4" );
+	AddStageWaypoint( "m0_hom5" );
+	AddStageWaypoint( "m0_hom6" );
+	AddObjective("follow","neither");
+		SetObjTargetVehicle("homer_v");
+		RemoveNPC("barney");
+	CloseObjective();
+	AddCondition("followdistance");
+		SetFollowDistances(0, 175);
+		SetCondTargetVehicle("homer_v");
+	CloseCondition();
+	AddCondition("outofvehicle");
+		SetCondTime( 10000 );
+	CloseCondition();
+	AddCondition( "damage" );
+		SetCondMinHealth( 0.0 );
+		SetCondTargetVehicle( "current" );
+	CloseCondition();
+	ShowStageComplete();
+	SetCompletionDialog("arrest");
+CloseStage();
+
+AddStage();
+	SetStageMessageIndex(05);
+	SetHUDIcon("homer");
+	AddObjective("talkto");
+		AddNPC("homer","m0_hom");
+		SetTalkToTarget("homer", 0, 0);
+		RemoveDriver("homer");
+	CloseObjective();
+CloseStage();
+
+AddStage();
+	AddObjective("dialogue");
+		AmbientAnimationRandomize( 1, 0 );      // ( pc=0, npc=1) (nonrandom=0, random=1)
+		AmbientAnimationRandomize( 0, 0 );
+		AddAmbientNpcAnimation( "none" );
+		AddAmbientNpcAnimation( "dialogue_hands_in_air" );
+		AddAmbientNpcAnimation( "none" );
+		AddAmbientNpcAnimation( "dialogue_no" );
+		AddAmbientNpcAnimation( "none" );
+		AddAmbientNpcAnimation( "dialogue_yes" );
+		AddAmbientPcAnimation( "dialogue_shake_hand_in_air" );
+		AddAmbientPcAnimation( "none" );
+		AddAmbientPcAnimation( "dialogue_thinking" );
+		AddAmbientPcAnimation( "none" );
+		AddAmbientPcAnimation( "none" );
+		AddAmbientPcAnimation( "none" );
+		AddAmbientPcAnimation( "dialogue_yes" );
+		SetDialogueInfo("wiggum","homer","smith",0);
+		SetDialoguePositions("m0_wiggu","m0_hom","m0_hom_bestside");
+	CloseObjective();
+CloseStage();
+
+AddStage();
+	SetHUDIcon("pwrplant");
+	SetStageMessageIndex(02);
+	AddObjective("goto");
+		SetDestination("m0_burns_office","triggersphere");
+		MustActionTrigger();
+		SetFadeOut(1.0);
+	CloseObjective();
+CloseStage();
+
+AddStage("final");
+	AddObjective("timer");
+		SetDurationTime(1);
+		AddNPC("burns","m5_burns_sd");
+		RemoveNPC("homer");
+	CloseObjective();
+CloseStage();
+
+CloseMission();

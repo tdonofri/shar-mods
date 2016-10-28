@@ -1,0 +1,42 @@
+SelectMission("m0sd");
+
+SetMissionResetPlayerOutCar("l1_wiggum_start", "l1_wiggu_v");
+SetDynaLoadData("l7z1.p3d;l7r1.p3d;l7r7.p3d;");
+
+UsePedGroup(0);
+
+AddStage(0);
+	SetStageMessageIndex(03);
+	SetHUDIcon("barne");
+	SetMaxTraffic(3);
+	AddObjective("talkto");
+		AddNPC("barney","level7_carstart");
+		SetTalkToTarget("barney", 0, 0);
+	CloseObjective();
+CloseStage();
+
+AddStage();
+	SetStageMessageIndex(03);
+	SetHUDIcon("barne");
+	AddObjective("dialogue");
+		SetPresentationBitmap( "art/frontend/dynaload/images/mis01_00.p3d" );
+		AmbientAnimationRandomize( 1, 0 );      // ( pc=0, npc=1) (nonrandom=0, random=1)
+		AmbientAnimationRandomize( 0, 0 );
+		AddAmbientNpcAnimation( "none" );
+		AddAmbientNpcAnimation( "dialogue_hands_in_air" );
+		AddAmbientNpcAnimation( "none" );
+		AddAmbientNpcAnimation( "dialogue_no" );
+		AddAmbientNpcAnimation( "none" );
+		AddAmbientNpcAnimation( "dialogue_yes" );
+		AddAmbientPcAnimation( "dialogue_shake_hand_in_air" );
+		AddAmbientPcAnimation( "none" );
+		AddAmbientPcAnimation( "dialogue_thinking" );
+		AddAmbientPcAnimation( "none" );
+		AddAmbientPcAnimation( "none" );
+		AddAmbientPcAnimation( "none" );
+		AddAmbientPcAnimation( "dialogue_yes" );
+		SetDialogueInfo("wiggum","barney","skid",0);
+	CloseObjective();
+CloseStage();
+
+CloseMission();

@@ -1,0 +1,57 @@
+SelectMission("m3sd");
+
+SetMissionResetPlayerOutCar("m2_wiggum", "level7_carstart");
+SetDynaLoadData("l7z1.p3d;l7r1.p3d;l7r7.p3d;");
+
+UsePedGroup(5);
+
+AddStage(5);
+	SetMaxTraffic(5);
+	SetStageMessageIndex(01);
+	SetHUDIcon( "homer" );
+	AddObjective("talkto");
+		AddNPC("homer", "m2_homer");
+		SetTalkToTarget("homer", 0, 0);
+	CloseObjective();
+CloseStage();
+
+AddStage();
+	AddObjective("dialogue");
+		SetPresentationBitmap( "art/frontend/dynaload/images/mis01_03.p3d" );
+		AmbientAnimationRandomize( 1, 0 );      // ( pc=0, npc=1) (nonrandom=0, random=1)
+		AmbientAnimationRandomize( 0, 0 );
+		AddAmbientNpcAnimation( "dialogue_shake_hand_in_air" );
+		AddAmbientNpcAnimation( "none" );
+		AddAmbientNpcAnimation( "none" );
+		AddAmbientNpcAnimation( "none" );
+		AddAmbientNpcAnimation( "dialogue_scratch_head" );
+		AddAmbientNpcAnimation( "none" );
+		AddAmbientNpcAnimation( "none" );
+		AddAmbientNpcAnimation( "none" );
+		AddAmbientPcAnimation( "none" );
+		AddAmbientPcAnimation( "dialogue_thinking" );
+		AddAmbientPcAnimation( "none" );
+		AddAmbientPcAnimation( "dialogue_yes" );
+		AddAmbientPcAnimation( "none" );
+		AddAmbientPcAnimation( "dialogue_no" );
+		AddAmbientPcAnimation( "none" );
+		AddAmbientPcAnimation( "dialogue_shaking_fist" );
+		SetCamBestSide( "m2_bestside_1" );
+		SetDialogueInfo("wiggum","homer","clever",0);
+		SetDialoguePositions("m2_wiggum","m2_homer","level7_carstart");
+	CloseObjective();
+CloseStage();
+
+CloseMission();
+
+
+//dialogue_hands_in_air
+//dialogue_hands_on_hips
+//dialogue_scratch_head
+//dialogue_shaking_fist
+//dialogue_thinking
+//dialogue_yes
+//dialogue_no
+//dialogue_cross_arms
+//dialogue_open_arm_hand_gesture
+//dialogue_shake_hand_in_air
