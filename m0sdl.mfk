@@ -1,0 +1,2 @@
+LoadP3DFile( "art\frontend\dynaload\images\msnicons\location\kburger.p3d" );
+LoadP3DFile( "art\frontend\dynaload\images\msnicons\char\nelson.p3d" );

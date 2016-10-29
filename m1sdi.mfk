@@ -1,0 +1,39 @@
+SelectMission("m1sd");
+
+SetMissionResetPlayerOutCar("m0_npc","m0_carstart");
+SetDynaLoadData("l5z4.p3d;l5r3.p3d;l5r4.p3d;");
+
+UsePedGroup(5);
+
+AddStage(0);
+	SetHUDIcon( "louie" );
+	SetMaxTraffic(2);
+	SetStageMessageIndex(01);
+	AddObjective("talkto");
+		AddNPC("louie","m0_npc_talk");
+		SetTalkToTarget("louie", 0, 0);
+	CloseObjective();
+CloseStage();
+
+AddStage();
+	AddObjective("dialogue");
+		SetPresentationBitmap( "art/frontend/dynaload/images/mis01_01.p3d" );
+		AmbientAnimationRandomize( 1, 0 );      // ( pc=0, npc=1) (nonrandom=0, random=1)
+		AmbientAnimationRandomize( 0, 0 );
+		SetConversationCam( 0, "npc_far" );
+		SetConversationCam( 1, "pc_far" );
+		SetConversationCam( 2, "npc_far" );
+		AddAmbientNpcAnimation( "dialogue_shaking_fist" );
+		AddAmbientNpcAnimation( "none" );
+		AddAmbientNpcAnimation( "dialogue_cross_arms" );
+		AddAmbientPcAnimation( "dialogue_scratch_head" );
+		AddAmbientPcAnimation( "none" );	
+		AddAmbientPcAnimation( "dialogue_shake_hand_in_air" );
+		SetDialogueInfo("homer","louie","who",0);
+		SetConversationCam( 0, "pc_near" );
+		SetCamBestSide("m0_bestside");
+		SetDialoguePositions("m0_npc_talk","m0_hom_talk","m0_carstart");
+	CloseObjective();
+CloseStage();
+
+CloseMission();

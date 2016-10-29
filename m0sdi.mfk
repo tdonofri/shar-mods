@@ -1,0 +1,49 @@
+SelectMission("m0sd");
+
+SetMissionResetPlayerOutCar("level5_apu_start","level5_carstart");
+SetDynaLoadData("l5z4.p3d;l5r3.p3d;l5r4.p3d;");
+
+UsePedGroup(5);
+
+AddStage(0);
+	SetHUDIcon( "kburger" );
+	SetMaxTraffic(2);
+	SetStageMessageIndex(01);
+	AddObjective("goto", "neither");
+		AddNPC("nelson","m0_npc_talk");
+		SetDestination("m0_krusty","carsphere");
+		SetCollectibleEffect("wrench_collect");
+	CloseObjective();
+CloseStage();
+
+AddStage(2);
+	SetMaxTraffic(2);
+	SetStageMessageIndex(02);
+	SetHUDIcon( "nelson" );
+	AddObjective("talkto");
+		AddNPC("nelson","m0_npc_talk");
+		SetTalkToTarget("nelson", 0, 0);
+	CloseObjective();
+CloseStage();
+
+AddStage(1);
+	AddObjective("dialogue");
+		SetPresentationBitmap( "art/frontend/dynaload/images/mis01_00.p3d" );
+		AmbientAnimationRandomize( 1, 0 );      // ( pc=0, npc=1) (nonrandom=0, random=1)
+		AmbientAnimationRandomize( 0, 0 );
+		SetConversationCam( 0, "pc_far" );
+		SetConversationCam( 1, "npc_far" );
+		SetConversationCam( 2, "pc_far" );
+		AddAmbientNpcAnimation( "none" );
+		AddAmbientNpcAnimation( "dialogue_yes" );
+		AddAmbientNpcAnimation( "none" );
+		AddAmbientPcAnimation( "dialogue_shaking_fist" );
+		AddAmbientPcAnimation( "none" );	
+		AddAmbientPcAnimation( "dialogue_scratch_head" );
+		SetCamBestSide( "m0_bestside" );
+		SetDialogueInfo("nelson","homer","mission",0);
+		SetDialoguePositions("m0_npc_talk","m0_hom_talk","m0_carstart");
+		CloseObjective();
+	CloseStage();
+
+CloseMission();

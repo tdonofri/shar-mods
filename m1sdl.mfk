@@ -1,0 +1,2 @@
+LoadDisposableCar("art\cars\cLimo.p3d","cLimo","AI"); 
+LoadP3DFile( "art\frontend\dynaload\images\msnicons\char\louie.p3d" );

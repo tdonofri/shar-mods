@@ -1,0 +1,90 @@
+SelectMission("m0");
+
+SetMissionResetPlayerInCar("m0_carstart");
+SetDynaLoadData("l5r4.p3d;l5r3.p3d;l5z4.p3d;");
+
+	UsePedGroup(5);
+
+	AddStage(3);
+	SetStageMessageIndex(12);
+	AddObjective("getin");
+		SetObjTargetVehicle("current");
+		RemoveNPC("nelson");
+	CloseObjective();
+	SetStageTime(15);
+	AddCondition("timeout");
+		//SetHitNRun();
+	CloseCondition();
+CloseStage();
+
+	AddStage();
+		SetHUDIcon( "race"); 
+		DisableHitAndRun();
+		PlacePlayerCar("current", "m0_carstart");
+PutMFPlayerInCar();  // This makes the play auto reset into their car for this stage.      
+		StartCountdown("count");
+			AddToCountdownSequence( "3", 1200 ); // duration time in milliseconds
+			AddToCountdownSequence( "2", 1000 ); // duration time in milliseconds
+			AddToCountdownSequence( "1", 600 ); // duration time in milliseconds
+		SetStageMessageIndex(223);
+		RESET_TO_HERE();
+		NoTrafficForStage();
+		AddStageVehicle("lancer","m0_ai_1","race","Missions\level05\sr2_2nd.con");
+			SetStageAIRaceCatchupParams("lancer", 80, 1.0, 1.2, 2.5); 
+//		AddStageVehicle("sportsB","m0_ai_2","race","Missions\level05\sr2_2nd.con");
+//			SetStageAIRaceCatchupParams("sportsB", 80, 0.75, 1.1, 2.0); 
+		AddStageVehicle("skyline","m0_ai_2","race","Missions\level05\sr2_3rd.con");
+			SetStageAIRaceCatchupParams("skyline", 80, 0.75, 1.1, 2.0); 
+		AddStageVehicle("eclipse","m0_ai_3","race","Missions\level05\sr2_4th.con");
+			SetStageAIRaceCatchupParams("eclipse", 80, 0.75, 1.1, 2.0); 
+		AddStageWaypoint( "m0_waypoint1b" );
+		AddStageWaypoint( "m0_waypoint2b" );
+		AddStageWaypoint( "m0_waypoint3b" );
+		AddStageWaypoint( "m0_waypoint4b" );
+		AddStageWaypoint( "m0_waypoint7" );
+		AddStageWaypoint( "m0_waypoint6" );
+		AddObjective( "race", "neither" );
+			AddCollectible("m0_waypoint2","carsphere");
+			SetCollectibleEffect("wrench_collect");
+			AddCollectible("m0_waypoint3","carsphere");
+			SetCollectibleEffect("wrench_collect");
+			AddCollectible("m0_waypoint4","carsphere");
+			SetCollectibleEffect("wrench_collect");
+			AddCollectible("m0_waypoint5","carsphere");
+			SetCollectibleEffect("wrench_collect");
+			SetRaceLaps(3);
+		CloseObjective();
+		AddCondition("position");
+			SetConditionPosition(1);
+		CloseCondition();
+		AddCondition( "damage" );
+			SetCondMinHealth( 0.0 );
+			SetCondTargetVehicle( "current");
+		CloseCondition();
+		AddCondition("outofvehicle");
+			SetCondTime( 10000 );
+		CloseCondition();
+		StageStartMusicEvent("M7_start");
+	CloseStage();
+
+	AddStage();
+		AddObjective("timer");
+			SetDurationTime(1);
+			AddNPC("louie","m0_npc_talk");
+		CloseObjective();
+	CloseStage();
+	
+	AddStage();
+		AddObjective("timer");
+			SetDurationTime(1);
+		CloseObjective();
+		StageStartMusicEvent("L1_start");
+	CloseStage();
+	
+	AddStage("final");
+		AddObjective("timer");
+			SetDurationTime(1);
+		CloseObjective();
+	CloseStage();
+	
+CloseMission();

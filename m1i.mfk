@@ -1,0 +1,91 @@
+SelectMission("m1");
+
+SetMissionResetPlayerOutCar("m0_hom_talk","m0_carstart");
+SetDynaLoadData("l5r4.p3d;l5r3.p3d;l5z4.p3d;");
+
+UsePedGroup(5);
+
+AddStage();
+	SetStageMessageIndex(12);
+	AddObjective("getin");
+		SetObjTargetVehicle("current");
+	CloseObjective();
+	SetStageTime(10);
+	AddCondition("timeout");
+	CloseCondition();
+CloseStage();
+
+AddStage(0);
+	SetHUDIcon( "blimo_v" );
+	SetStageMessageIndex(02);
+	AddObjective("losetail");
+		RemoveNPC( "louie" );
+		AddStageVehicle("cLimo","m1_limo","chase","Missions\level05\M2evade.con", "louie");
+		SetObjTargetVehicle("cLimo");
+		SetObjDistance(150);
+	CloseObjective();
+	AddCondition( "damage" );
+		SetCondMinHealth( 0.0 );
+		SetCondTargetVehicle( "current" );
+	CloseCondition();
+	AddStageTime(45);
+	AddCondition("timeout");
+		//SetHitNRun();
+	CloseCondition();
+	ShowStageComplete();
+CloseStage();
+
+AddStage(1);
+	SetStageMessageIndex(71);
+	SetHUDIcon( "hospital" );
+	SetMaxTraffic(3);
+	AddStageTime(20);
+	AddObjective("goto");
+		AddStageVehicle("cLimo","m3_carstart","NULL","Missions\level01\M3dest.con", "louie");
+		SetDestination("m2_hospital", "carsphere");
+		SetCollectibleEffect("wrench_collect");
+	CloseObjective();
+	AddCondition("timeout");
+		//SetHitNRun();
+	CloseCondition();
+CloseStage();
+
+AddStage();
+	SetStageMessageIndex(03);
+	SetHUDIcon("blimo_v");
+	ActivateVehicle("cLimo","NULL","chase");
+	AddObjective("destroy");
+		SetObjTargetVehicle("cLimo");
+	CloseObjective();
+	AddStageTime(70);
+	AddCondition("outofvehicle");
+		SetCondTime( 10000 );
+	CloseCondition();
+	AddCondition( "damage" );
+		SetCondMinHealth( 0.0 );
+		SetCondTargetVehicle( "current" );
+	CloseCondition();
+	AddCondition("followdistance");
+		SetFollowDistances(0, 155);
+		SetCondTargetVehicle("cLimo");
+	CloseCondition();
+	AddCondition("timeout");
+		//SetHitNRun();
+	CloseCondition();
+CloseStage();
+
+AddStage("final");
+	SetStageMessageIndex(71);
+	SetHUDIcon( "hospital" );
+	SetMaxTraffic(3);
+	AddStageTime(30);
+	AddObjective("goto");
+		SetDestination("m2_hospital", "carsphere");
+		SetCollectibleEffect("wrench_collect");
+	CloseObjective();
+	AddCondition("timeout");
+		//SetHitNRun();
+	CloseCondition();
+CloseStage();
+
+CloseMission();
