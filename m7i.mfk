@@ -1,0 +1,157 @@
+SelectMission("m7");
+
+SetMissionResetPlayerInCar("m7_grampa_carstart");
+SetDynaLoadData("l7z3.p3d;l7r2.p3d;l7r3.p3d;");
+SetNumValidFailureHints( 5 );
+UsePedGroup(3);
+
+AddStage(0);
+	SetStageMessageIndex(12);
+	AddObjective("getin");
+		SetObjTargetVehicle("current");
+	CloseObjective();
+	SetStageTime(15);
+	AddCondition("timeout");
+	CloseCondition();
+CloseStage();
+
+AddStage(0); 
+	RESET_TO_HERE();
+	DisableHitAndRun();
+	SetMaxTraffic(0);
+	SetStageMessageIndex(03);
+	SetHUDIcon( "pwrplant" );
+
+	StartCountdown(count);
+	AddToCountdownSequence( "3", 1000 ); // duration time in milliseconds
+	AddToCountdownSequence( "2", 1000 ); // duration time in milliseconds
+	AddToCountdownSequence( "1", 1000 ); // duration time in milliseconds
+	AddToCountdownSequence( "GO", 400 ); // duration time in milliseconds
+	
+	AddStageWaypoint( "m7_waypoint1" );
+	AddStageWaypoint( "m7_waypoint2" );
+	AddStageWaypoint( "m7_race_finish" );
+
+	AddObjective( "goto" );
+//		RemoveNPC( "homer" );
+		AddStageVehicle("cBlbart","m2_AI_carstart","chase","Missions\level07\M7chase.con");
+		AddStageVehicle("gramR_v","m7_hom_start","race","Missions\level07\M7race.con","homer");
+				SetVehicleAIParams( "gramR_v", 50, 51 );
+			SetStageAIRaceCatchupParams("gramR_v", 80, 0.8, 1.11, 1.75); 
+		SetDestination( "power_plant","carsphere" );
+	CloseObjective();
+	AddCondition("outofvehicle");
+		SetCondTime( 10000 );
+	CloseCondition();
+	AddCondition( "damage" );
+		SetCondMinHealth( 0.0 );
+		SetCondTargetVehicle( "current" );
+	CloseCondition();
+	AddCondition("followdistance");
+		SetFollowDistances(0, 200);
+		SetCondTargetVehicle("gramR_v");
+	CloseCondition();
+CloseStage();
+
+AddStage(0);
+SetMaxTraffic(0);
+DisableHitAndRun();
+	SetStageMessageIndex(202);
+	SetHUDIcon( "playgrou" );
+	AddStageWaypoint( "m7_race_finish" );
+	AddStageWaypoint( "m7_waypoint2" );
+	AddStageWaypoint( "m7_waypoint1" );
+	AddStageVehicle("gramR_v","m7_hom_nuc1","target","Missions\level07\M7race.con","homer");
+	SetVehicleAIParams( "gramR_v", 50, 51 );
+			SetStageAIRaceCatchupParams("gramR_v", 80, 0.8, 1.11, 1.75); 
+	AddStageVehicle("cProbe","m7_blacksedan2","NULL","Missions\level07\M7race.con");
+	AddObjective( "goto" );
+		SetDestination( "m7_blacksedan2_trigger", "carsphere");
+	SetCollectibleEffect("wrench_collect");
+	CloseObjective();
+	AddCondition("outofvehicle");
+		SetCondTime( 1000 );
+	CloseCondition();
+	AddCondition( "damage" );
+		SetCondMinHealth( 0.0 );
+		SetCondTargetVehicle( "current" );
+	CloseCondition();
+	AddCondition("followdistance");
+		SetFollowDistances(0, 200);
+		SetCondTargetVehicle("gramR_v");
+	CloseCondition();
+	StageStartMusicEvent("M7_drama");
+CloseStage();
+
+AddStage(0);
+	SetStageMessageIndex(265);
+	SetHUDIcon( "sports_v" );
+	ActivateVehicle( "cProbe","NULL","chase" );
+	AddObjective( "losetail" );
+		SetObjTargetVehicle( "cProbe" );
+		SetObjDistance(150);
+	CloseObjective();
+	AddStageTime(40);// <<--- Adding stage time so not too make is so hard
+	AddCondition( "timeout" );
+	CloseCondition();
+	AddCondition("outofvehicle");
+		SetCondTime( 10000 );
+	CloseCondition();
+	AddCondition( "damage" );
+		SetCondMinHealth( 0.0 );
+		SetCondTargetVehicle( "gramR_v" );
+	CloseCondition();
+CloseStage();
+
+AddStage();
+DisableHitAndRun();
+	SetStageMessageIndex(04);
+	SetHUDIcon("kwike");
+	AddStageVehicle("gramR_v","m1_ambul","NULL","Missions\level07\M7race.con","homer");
+	AddObjective("goto");
+		SetDestination("m1_kwike","carsphere");
+	CloseObjective();
+	SetStageTime(30);
+	AddCondition("timeout");
+	CloseCondition();
+	AddCondition("outofvehicle");
+		SetCondTime( 10000 );
+	CloseCondition();
+	AddCondition( "damage" );
+		SetCondMinHealth( 0.0 );
+		SetCondTargetVehicle( "current" );
+	CloseCondition();
+	ShowStageComplete();
+CloseStage();
+
+AddStage("final");
+SetMaxTraffic(0);
+DisableHitAndRun();
+	SetStageMessageIndex(202);
+	SetHUDIcon( "playgrou" );
+	AddStageWaypoint( "m2_playground" );
+	ActivateVehicle("gramR_v","NULL","target");
+	SetVehicleAIParams( "gramR_v", 50, 51 );
+	SetStageAIRaceCatchupParams("gramR_v", 80, 0.8, 1.11, 1.75);
+	AddStageVehicle("cBlbart","roadblock_1","NULL","MedRace\AI_1st.con");
+	AddStageVehicle("cProbe","roadblock_2","NULL","MedRace\AI_2nd.con");
+	AddStageVehicle("cSedan","roadblock_3","NULL","MedRace\AI_2nd.con");
+	AddObjective( "goto" );
+		SetDestination( "m2_playground", "carsphere");
+	SetCollectibleEffect("wrench_collect");
+	CloseObjective();
+	AddCondition("outofvehicle");
+		SetCondTime( 1000 );
+	CloseCondition();
+	AddCondition( "damage" );
+		SetCondMinHealth( 0.0 );
+		SetCondTargetVehicle( "current" );
+	CloseCondition();
+	AddCondition("followdistance");
+		SetFollowDistances(0, 200);
+		SetCondTargetVehicle("gramR_v");
+	CloseCondition();
+CloseStage();
+
+
+CloseMission();

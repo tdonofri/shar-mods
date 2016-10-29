@@ -1,0 +1,62 @@
+SelectMission("m6sd");
+
+SetMissionResetPlayerOutCar("m2_homer_start", "m6_snake_carstart");
+SetDynaLoadData("l7z3.p3d;l7r2.p3d;l7r3.p3d;");
+
+UsePedGroup(3);
+
+AddStage(0);
+	SetMaxTraffic(5);
+	SetStageMessageIndex(02);
+	SetHUDIcon( "playgrou" );
+	AddObjective( "goto" );
+		AddNPC("moe", "m2_cbg_sd");
+		AddStageVehicle("moe_v","m2_carstart","NULL","Chase\EasyChas.con");
+		SetDestination( "m2_playground", "carsphere");
+		SetCollectibleEffect("wrench_collect");
+	CloseObjective();
+CloseStage();
+
+AddStage(0);
+	RESET_TO_HERE();
+	SetStageMessageIndex(01);
+	SetHUDIcon( "moe" );
+	AddObjective("talkto");
+		AddNPC("moe", "m2_cbg_sd");
+		SetTalkToTarget("moe", 0, 0);
+	CloseObjective();
+CloseStage();
+
+AddStage(0);
+	AddObjective("dialogue");
+	    SetPresentationBitmap( "art/frontend/dynaload/images/mis01_06.p3d" );
+		AmbientAnimationRandomize( 1, 0 );      // ( pc=0, npc=1) (nonrandom=0, random=1)
+		AmbientAnimationRandomize( 0, 0 );
+		AddAmbientNpcAnimation( "dialogue_scratch_head" );
+		AddAmbientNpcAnimation( "none" );
+		AddAmbientNpcAnimation( "none" );
+		AddAmbientNpcAnimation( "none" );
+		AddAmbientNpcAnimation( "dialogue_yes" );
+		AddAmbientPcAnimation( "none" );
+		AddAmbientPcAnimation( "dialogue_cross_arms" );
+		AddAmbientPcAnimation( "none" );
+		AddAmbientPcAnimation( "dialogue_shaking_fist" );
+		AddAmbientPcAnimation( "none" );
+		SetDialogueInfo("wiggum","moe","away",0);
+		SetCamBestSide( "m2_bestside" );
+		SetDialoguePositions("m2_homer_start","m2_cbg_walk1","m2_carstart");
+	CloseObjective();
+CloseStage();
+
+CloseMission();
+
+//dialogue_hands_in_air
+//dialogue_hands_on_hips
+//dialogue_scratch_head
+//dialogue_shaking_fist
+//dialogue_thinking
+//dialogue_yes
+//dialogue_no
+//dialogue_cross_arms
+//dialogue_open_arm_hand_gesture
+//dialogue_shake_hand_in_air
