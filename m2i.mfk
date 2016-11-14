@@ -1,0 +1,69 @@
+SelectMission("m2");
+
+SetMissionResetPlayerOutCar("L4_marge_sd","level4_carstart");
+SetDynaLoadData("l4z1.p3d;l4r1.p3d;l4r7.p3d;l4i02.p3d@", "SimpsonsHouse");
+
+UsePedGroup(6);
+
+AddStage(2);
+RESET_TO_HERE();
+	SetStageMessageIndex(12);
+	AddObjective("getin");
+		RemoveNPC("louie");
+		SetObjTargetVehicle("current");
+	CloseObjective();
+	SetStageTime(30);
+	AddCondition("timeout");
+	CloseCondition();
+CloseStage();
+
+AddStage(0);
+//	SetStageMessageIndex();
+//	SetHUDIcon();
+	AddStageVehicle("wiggu_v","wiggum_hide","NULL","Missions\level04\M7evade.con","wiggum");
+	AddObjective("goto");
+//		RemoveNPC("moe");
+		SetDestination("m2_false", "carsphere");
+		SetCollectibleEffect("none");
+	CloseObjective();
+	SetCompletionDialog("arrest","wiggum");
+CloseStage();
+
+AddStage();
+//	SetStageMessageIndex(04);
+//	SetHUDIcon("cletus_v");
+	ActivateVehicle("wiggu_v","NULL","chase");
+	AddObjective("losetail");
+		SetObjTargetVehicle("wiggu_v");
+		SetObjDistance(150);
+	CloseObjective();
+	SetStageTime(67);
+	AddCondition("timeout");
+	CloseCondition();
+	ShowStageComplete();
+	SetCompletionDialog("phone","moe");
+CloseStage();
+
+AddStage();
+//	SetHUDIcon("cletushs");
+//	SetStageMessageIndex(215);
+	AddObjective("goto");
+		AddNPC("mobstr","m2_captive");
+		SetDestination("m2_mansion","carsphere");
+	CloseObjective();
+	SetStageTime(55);
+	AddCondition("timeout");
+	CloseCondition();
+CloseStage();
+
+AddStage("final");
+//	SetHUDIcon("simpsons");
+//	SetStageMessageIndex(01);
+	AddObjective("goto");
+		SetDestination("m2_freed","triggersphere");
+		MustActionTrigger();
+		SetCollectibleEffect("none");
+	CloseObjective();
+CloseStage();
+
+CloseMission();

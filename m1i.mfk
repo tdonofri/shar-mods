@@ -1,0 +1,162 @@
+SelectMission("m1");
+
+SetMissionResetPlayerOutCar("m1_hom_start","m1_hom_car");
+SetDynaLoadData("l4r4a.p3d;l4z6.p3d;l4r6.p3d;");
+
+UsePedGroup(0);
+
+AddStage(0);
+RESET_TO_HERE();
+	SetStageMessageIndex(12);
+	AddObjective("getin");
+		SetObjTargetVehicle("current");
+		RemoveNPC("moe");
+	CloseObjective();
+	SetStageTime(20);
+	AddCondition("timeout");
+	CloseCondition();
+CloseStage();
+
+AddStage();
+	SetHUDIcon("simpsons");
+	SetStageMessageIndex(08);
+	AddObjective("goto");
+		SetDestination("m1_simp","carsphere");
+	CloseObjective();
+	SetStageTime(80);
+	AddCondition("timeout");
+	CloseCondition();
+CloseStage();
+
+AddStage();
+	SetHUDIcon("simpsons");
+	AddObjective("interior");
+		SetDestination("SimpsonsHouse", "simp_mission_doorstar");
+	CloseObjective();
+CloseStage();
+
+AddStage();
+	SetHUDIcon("krusty");
+	SetStageMessageIndex(02);
+	AddObjective("goto");
+		SetDestination("m1_krusty","ketchup");
+	CloseObjective();
+	SetStageTime(15);
+	AddCondition("timeout");
+	CloseCondition();
+CloseStage();
+
+AddStage();
+	SetStageMessageIndex(250);
+	AddObjective("gooutside");
+		SetDestination("simp","simp_mission_doorstar");
+	CloseObjective();
+CloseStage();
+
+AddStage(0);
+//RESET_TO_HERE();
+	SetStageMessageIndex(12);
+	AddObjective("getin");
+		SetObjTargetVehicle("current");
+	CloseObjective();
+	SetStageTime(20);
+	AddCondition("timeout");
+	CloseCondition();
+CloseStage();
+
+AddStage();
+	SetHUDIcon("cletushs");
+	SetStageMessageIndex(215);
+	AddStageVehicle("cletu_v","m1_cletu_v","NULL","Missions\level04\M7evade.con","cletus");
+	AddObjective("goto");
+		SetDestination("m1_dish","s_dish");
+	CloseObjective();
+	SetStageTime(45);
+	AddCondition("timeout");
+	CloseCondition();
+CloseStage();
+
+AddStage();
+	SetStageMessageIndex(04);
+	SetHUDIcon("cletus_v");
+	ActivateVehicle("cletu_v","NULL","chase");
+	AddObjective("losetail");
+		SetObjTargetVehicle("cletu_v");
+		SetObjDistance(125);
+	CloseObjective();
+	SetStageTime(70);
+	AddCondition("timeout");
+	CloseCondition();
+	ShowStageComplete();
+CloseStage();
+
+AddStage();
+SetStageMessageIndex(05);
+SetHUDIcon("wstation");
+AddStageVehicle("nuctruck","m1_nuc","NULL","Missions\level01\M6dump.con");
+AddObjective("goto");
+	SetDestination("m0_office_1","carsphere");
+CloseObjective();
+SetStageTime(60);
+	AddCondition("timeout");
+	CloseCondition();
+	ShowStageComplete();
+CloseStage();
+
+AddStage();
+	SetStageMessageIndex(06);
+	SetHUDIcon( "cola_v" );
+	AddStageWaypoint("m1_waypoint1");
+	AddStageWaypoint("m1_waypoint3");
+	AddStageWaypoint("m1_waypoint4");
+	AddStageWaypoint("m1_waypoint5");
+	AddStageWaypoint("m1_waypoint6");
+	AddStageWaypoint("m1_waypoint7");
+	AddStageWaypoint("m1_waypoint8");
+	AddStageWaypoint("m1_waypoint1");
+	ActivateVehicle("nuctruck","NULL","target");
+	SetStageTime(95);
+	AddObjective("dump");
+		SetObjTargetVehicle("nuctruck");
+		AddCollectible("m1_waypoint2","ketchup");
+	CloseObjective();
+	AddCondition("timeout");
+	CloseCondition();
+	AddCondition("outofvehicle");
+		SetCondTime( 10000 );
+	CloseCondition();
+	AddCondition( "damage" );
+		SetCondMinHealth( 0.0 );
+		SetCondTargetVehicle( "current" );
+	CloseCondition();
+	AddCondition("followdistance");
+		SetFollowDistances(0, 125);
+		SetCondTargetVehicle("nuctruck");
+	CloseCondition();
+	ShowStageComplete();
+CloseStage();
+
+AddStage("final");
+	SetHUDIcon("simpsons");
+	SetStageMessageIndex(07);
+	AddObjective("goto");
+		SetDestination("m1_simp","carsphere");
+	CloseObjective();
+	SetStageTime(80);
+	AddCondition("timeout");
+	CloseCondition();
+CloseStage();
+
+CloseMission();
+
+
+//dialogue_hands_in_air
+//dialogue_hands_on_hips
+//dialogue_scratch_head
+//dialogue_shaking_fist
+//dialogue_thinking
+//dialogue_yes
+//dialogue_no
+//dialogue_cross_arms
+//dialogue_open_arm_hand_gesture
+//dialogue_shake_hand_in_air

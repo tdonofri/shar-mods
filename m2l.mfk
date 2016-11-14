@@ -1,0 +1,4 @@
+LoadP3DFile("art\missions\level01\m2.p3d");
+LoadP3DFile("art\missions\level01\m1.p3d");
+
+LoadDisposableCar("art\cars\wiggu_v.p3d","wiggu_v","AI");

@@ -1,0 +1,108 @@
+SelectMission("m0");
+
+SetMissionResetPlayerInCar("level4_carstart");
+SetDynaLoadData("l4z1.p3d;l4r1.p3d;l4r7.p3d;");
+
+UsePedGroup(0);
+
+AddStage(0);
+	SetStageMessageIndex(12);
+	AddObjective("getin");
+		SetObjTargetVehicle("current");
+	CloseObjective();
+CloseStage();
+
+AddStage();
+	RESET_TO_HERE();
+	SetHUDIcon("mansion");
+	SetStageMessageIndex(02);
+	AddObjective("goto");
+		SetDestination("m1_pwr_plnt","carsphere");
+	CloseObjective();
+	SetStageTime(80);
+	AddCondition("timeout");
+	CloseCondition();
+CloseStage();
+
+AddStage();
+	SetHUDIcon("burns");
+	SetStageMessageIndex(03);
+	AddObjective("goto");
+		SetDestination("m1_office","triggersphere");
+		MustActionTrigger();
+		SetCollectibleEffect("none");
+	CloseObjective();
+CloseStage();
+
+AddStage(1);
+	AddObjective("fmv");
+		SetFMVInfo("fmv1a.rmv");
+	CloseObjective();
+CloseStage();
+
+AddStage();
+	AddObjective("timer");
+		SetDurationTime(0.6);
+	CloseObjective();
+CloseStage();
+
+AddStage(0);
+	SetStageMessageIndex(12);
+	AddObjective("getin");
+		SetObjTargetVehicle("current");
+	CloseObjective();
+CloseStage();
+
+AddStage();
+	SetStageMessageIndex(04);
+	SetHUDIcon();
+	AddStageVehicle("smith_v","m0_smith","chase","Missions\level04\M7evade.con");
+	AddObjective("losetail");
+		SetObjTargetVehicle("smith_v");
+		SetObjDistance(300);
+	CloseObjective();
+	SetStageTime(60);
+	AddCondition("timeout");
+		//SetHitNRun();
+	CloseCondition();
+	ShowStageComplete();
+//	StageStartMusicEvent("M6_drama");
+CloseStage();
+
+AddStage();
+SetStageMessageIndex(05);
+SetHUDIcon("wstation");
+AddObjective("goto");
+	SetDestination("m0_office_1","carsphere");
+CloseObjective();
+SetStageTime(60);
+	AddCondition("timeout");
+		//SetHitNRun();
+	CloseCondition();
+	ShowStageComplete();
+CloseStage();
+
+
+AddStage("final");
+	SetHUDIcon("wstation");
+	SetStageMessageIndex();
+	AddObjective("goto");
+		SetDestination("m0_office_2","triggersphere");
+		MustActionTrigger();
+		SetCollectibleEffect("none");
+	CloseObjective();
+CloseStage();
+
+CloseMission();
+
+
+//dialogue_hands_in_air
+//dialogue_hands_on_hips
+//dialogue_scratch_head
+//dialogue_shaking_fist
+//dialogue_thinking
+//dialogue_yes
+//dialogue_no
+//dialogue_cross_arms
+//dialogue_open_arm_hand_gesture
+//dialogue_shake_hand_in_air

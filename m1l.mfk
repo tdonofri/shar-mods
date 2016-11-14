@@ -1,0 +1,11 @@
+LoadP3DFile("art\missions\level01\m1.p3d");
+LoadP3DFile("art\missions\level01\ketchup.p3d");
+LoadP3DFile("art\frontend\dynaload\images\msnicons\location\cletushs.p3d");
+LoadP3DFile("art\frontend\dynaload\images\msnicons\location\simpsons.p3d");
+LoadP3DFile("art\frontend\dynaload\images\msnicons\char\krusty.p3d");
+LoadP3DFile( "art\frontend\dynaload\images\msnicons\vehicle\cletus_v.p3d" );
+LoadP3DFile( "art\frontend\dynaload\images\msnicons\vehicle\cola_v.p3d" );
+LoadP3DFile("art\missions\level01\s_dish.p3d");
+//LoadDisposableCar("art\cars\cletu_v","cletu_v","AI");
+LoadDisposableCar("art\cars\nuctruck.p3d","nuctruck","AI");
+LoadDisposableCar("art\cars\cletu_v.p3d","cletu_v","AI");

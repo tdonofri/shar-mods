@@ -1,0 +1,44 @@
+SelectMission("m1sd");
+
+SetMissionResetPlayerOutCar("m1_hom_start","m1_hom_car");
+SetDynaLoadData("l4r4a.p3d;l4z6.p3d;l4r6.p3d;");
+UsePedGroup(0);
+
+AddStage();
+	SetHUDIcon("wstation");
+	SetStageMessageIndex(01);
+	AddObjective("goto");
+		AddNPC("moe","moe_walk_1");
+		SetDestination("m0_office_2","triggersphere");
+		MustActionTrigger();
+		SetCollectibleEffect("none");
+	CloseObjective();
+CloseStage();
+
+	AddStage(1);
+		AddObjective("dialogue");
+			SetPresentationBitmap( "art/frontend/dynaload/images/mis01_01.p3d" );
+			AmbientAnimationRandomize( 1, 0 );      // ( pc=0, npc=1) (nonrandom=0, random=1)
+			AmbientAnimationRandomize( 0, 0 );
+			AddAmbientNpcAnimation( "none" );
+			AddAmbientNpcAnimation( "none" );
+			AddAmbientPcAnimation( "dialogue_shaking_fist" );
+			AddAmbientPcAnimation( "dialogue_hands_in_air" );
+			SetConversationCam( 3, "pc_far" );
+			SetDialogueInfo("homer","moe","food",0);
+		CloseObjective();
+	CloseStage();
+
+CloseMission();
+
+
+//dialogue_hands_in_air
+//dialogue_hands_on_hips
+//dialogue_scratch_head
+//dialogue_shaking_fist
+//dialogue_thinking
+//dialogue_yes
+//dialogue_no
+//dialogue_cross_arms
+//dialogue_open_arm_hand_gesture
+//dialogue_shake_hand_in_air
